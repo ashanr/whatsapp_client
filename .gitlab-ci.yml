@@ -1,0 +1,12 @@
+stages:
+  - build
+  - deploy
+
+build:
+  script:
+    - npm install
+    - npm run build
+
+deploy:
+  script:
+    - scp dist/ user@server:/ etc/www/whatsapp_client
