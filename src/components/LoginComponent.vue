@@ -11,6 +11,7 @@
               <!-- Your QR Code here -->
               <img src="../assets/qr_code.svg" alt="QR Code" class="img-fluid" />
             </div>
+            <button @click="goToMessages" class="btn btn-whatsapp btn-login">Login</button>
           </div>
         </div>
       </div>
@@ -39,4 +40,16 @@ export default class LoginComponent extends Vue {
   background-color: #ECE5DD;
   color: black;
 }
+
+.btn-login {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
 </style>
