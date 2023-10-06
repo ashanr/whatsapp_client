@@ -20,6 +20,7 @@
   </template>
   
   <script>
+  import { mapState, mapMutations } from 'vuex';
   export default {
     name: 'MessageComponent',
     data() {
@@ -32,7 +33,11 @@
         ],
       };
     },
+    computed: {
+    ...mapState(['messages'])
+    },
     methods: {
+      ...mapMutations(['addMessage']),
       sendMessage() {
         if (this.newMessage.trim() === '') return;
         this.messages.push({ id: Date.now(), sender: 'me', text: this.newMessage.trim() });
