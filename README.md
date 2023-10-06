@@ -45,21 +45,8 @@ This project uses the following key packages:
 
 ## Docker Setup
 
-### Build Docker Image
-\`\`\`
-docker build -t my-whatsapp-clone .
-\`\`\`
+### Using Docker Compose 
 
-### Run Docker Container
-\`\`\`
-docker run -p 8080:8080 my-whatsapp-clone
-\`\`\`
-
-### Using Docker Compose
 \`\`\`
 docker-compose up
 \`\`\`
-
-## Contributing
-
-Feel free to open issues and pull requests!
