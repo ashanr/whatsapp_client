@@ -1,18 +1,20 @@
 <template>
-    <div class="message-component">
-      <div class="chat-header">
+    <div class="message-component container">
+      <div class="chat-header bg-whatsapp-header text-white">
         <h2>Chat with Ashan</h2>
       </div>
-      <div class="chat-box">
-        <div class="message" v-for="message in messages" :key="message.id">
-          <div :class="message.sender === 'me' ? 'message-right' : 'message-left'">
-            {{ message.text }}
+      <div class="chat-box bg-whatsapp-bg">
+        <div class="message row" v-for="message in messages" :key="message.id">
+          <div :class="message.sender === 'me' ? 'col-12 text-end' : 'col-12 text-start'">
+            <span :class="message.sender === 'me' ? 'bg-whatsapp-me text-white' : 'bg-whatsapp-them text-white'">
+              {{ message.text }}
+            </span>
           </div>
         </div>
       </div>
       <div class="chat-input">
-        <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Type a message" />
-        <button @click="sendMessage">Send</button>
+        <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Type a message" class="form-control" />
+        <button @click="sendMessage" class="btn btn-whatsapp">Send</button>
       </div>
     </div>
   </template>
@@ -95,5 +97,27 @@
     border: none;
     border-radius: 5px;
   }
+
+  .bg-whatsapp-header {
+  background-color: #075E54;
+}
+
+.bg-whatsapp-bg {
+  background-color: #ECE5DD;
+}
+
+.bg-whatsapp-me {
+  background-color: #060c01;
+}
+
+.bg-whatsapp-them {
+  background-color: black;
+}
+
+.btn-whatsapp {
+  background-color: #075E54;
+  color: white;
+}
+
   </style>
   
