@@ -1,119 +1,65 @@
-<template>
-  <div class="message-component">
-    <div class="chat-header">
-      <h2>Chat with Ashan</h2>
-    </div>
-    <div class="chat-box">
-      <div class="message" v-for="message in messages" :key="message.id">
-        <div :class="message.sender === 'me' ? 'message-right' : 'message-left'">
-          {{ message.text }}
-        </div>
-      </div>
-    </div>
-    <div class="chat-input">
-      <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Type a message" />
-      <button @click="sendMessage">Send</button>
-    </div>
-  </div>
-</template>
+# my-whatsapp-clone
 
-<script>
-export default {
-  name: 'MessageComponent',
-  data() {
-    return {
-      newMessage: '',
-      messages: [
-        { id: 1, sender: 'me', text: 'Hello' },
-        { id: 2, sender: 'them', text: 'Hi Ashan!' },
-        { id: 3, sender: 'me', text: 'How are you?' },
-      ],
-    };
-  },
-  mounted() {
-    this.scrollToBottom();
-  },
-  methods: {
-    sendMessage() {
-      if (this.newMessage.trim() === '') return;
-      this.messages.push({ id: Date.now(), sender: 'me', text: this.newMessage.trim() });
-      this.newMessage = '';
-      this.scrollToBottom();
-    },
-    scrollToBottom() {
-      this.$nextTick(() => {
-        const chatBox = this.$el.querySelector('.chat-box');
-        chatBox.scrollTop = chatBox.scrollHeight;
-      });
-    },
-  },
-};
-</script>
 
-<style scoped>
-.message-component {
-  width: 400px;
-  margin: auto;
-}
+## Project setup
 
-.chat-header {
-  background-color: #075E54;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
+## Package Details
 
-.chat-box {
-  height: 300px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
+This project uses the following key packages:
 
-.message {
-  margin: 10px;
-  width: 100%;
-  display: block;  /* Add this line */
-}
+- Vue.js: Front-end framework
+- Vuex: State management
+- Vite: Build tool
 
-.message-left,
-.message-right {
-  display: block;
-  padding: 10px;
-  border-radius: 10px;
-}
+## Setup Details
 
-.message-left {
-  background-color: #E1FFC7;
-}
+1. Clone the repository:
+   \`\`\`
+   git clone https://github.com/ashanr/whatsapp_client.git
+   \`\`\`
 
-.message-right {
-  background-color: #DCF8C6;
-  color: black;
-}
+2. Navigate to the project directory:
+   \`\`\`
+   cd whatsapp_client
+   \`\`\`
 
-.chat-input {
-  margin-top: 10px;
-}
+3. Install dependencies using pnpm:
+   \`\`\`
+   pnpm install
+   \`\`\`
 
-input[type="text"] {
-  width: 80%;
-  padding: 10px;
-}
+4. Start the development server:
+   \`\`\`
+   pnpm run serve
+   \`\`\`
 
-button {
-  padding: 11px 20px;
-  background-color: #075E54;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
+5. For production build:
+   \`\`\`
+   pnpm run build
+   \`\`\`
 
-.me {
-  background-color: #DCF8C6;
-}
+6. Linting and fixing files:
+   \`\`\`
+   pnpm run lint
+   \`\`\`
 
-.them {
-  background-color: #E1FFC7;
-}
-</style>
+## Docker Setup
+
+### Build Docker Image
+\`\`\`
+docker build -t my-whatsapp-clone .
+\`\`\`
+
+### Run Docker Container
+\`\`\`
+docker run -p 8080:8080 my-whatsapp-clone
+\`\`\`
+
+### Using Docker Compose
+\`\`\`
+docker-compose up
+\`\`\`
+
+## Contributing
+
+Feel free to open issues and pull requests!
