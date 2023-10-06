@@ -1,24 +1,67 @@
 # my-whatsapp-clone
 
+![Build Status](https://github.com/ashanr/whatsapp_client/actions/workflows/vuejs.yml/badge.svg)
+
+
 ## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Package Details
 
-### Compiles and minifies for production
-```
-npm run build
-```
+This project uses the following key packages:
 
-### Lints and fixes files
-```
-npm run lint
-```
+- Vue.js: Front-end framework
+- Vuex: State management
+- Vite: Build tool
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Setup Details
+
+1. Clone the repository:
+   \`\`\`
+   git clone https://github.com/ashanr/whatsapp_client.git
+   \`\`\`
+
+2. Navigate to the project directory:
+   \`\`\`
+   cd whatsapp_client
+   \`\`\`
+
+3. Install dependencies using pnpm:
+   \`\`\`
+   pnpm install
+   \`\`\`
+
+4. Start the development server:
+   \`\`\`
+   pnpm run serve
+   \`\`\`
+
+5. For production build:
+   \`\`\`
+   pnpm run build
+   \`\`\`
+
+6. Linting and fixing files:
+   \`\`\`
+   pnpm run lint
+   \`\`\`
+
+## Docker Setup
+
+### Build Docker Image
+\`\`\`
+docker build -t my-whatsapp-clone .
+\`\`\`
+
+### Run Docker Container
+\`\`\`
+docker run -p 8080:8080 my-whatsapp-clone
+\`\`\`
+
+### Using Docker Compose
+\`\`\`
+docker-compose up
+\`\`\`
+
+## Contributing
+
+Feel free to open issues and pull requests!
