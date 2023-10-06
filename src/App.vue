@@ -1,17 +1,16 @@
-<template>
+
+ <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <LoginComponent msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import LoginComponent from './components/LoginComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    LoginComponent
+  
   }
 }
 </script>

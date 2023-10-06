@@ -1,43 +1,20 @@
 <template>
-    <div>
-      <h1>WhatsApp Web QR Code</h1>
-      <div v-qrcode="qrData" v-if="qrData"></div>
+  <div>
+    <h1>Login to Whatsapp</h1>
+    <div @click="goToMessages">
+      <!-- Your QR Code here -->
+      <img src="../assets/qr_code.svg" alt="QR Code" />
     </div>
-  </template>
-  
-  <script>
-  import { Client } from 'whatsapp-web.js';
-  
-  export default {
-    data() {
-      return {
-        client: null,
-        qrData: null,
-      };
-    },
-    mounted() {
-      this.initializeWhatsApp();
-    },
-    methods: {
-      initializeWhatsApp() {
-        this.client = new Client();
-  
-        this.client.on('qr', (qr) => {
-          // Generate and display QR code for WhatsApp Web login
-          this.qrData = qr;
-        });
-  
-        this.client.on('ready', () => {
-          console.log('Client is ready!');
-          this.qrData = null;
-          // Set isAuthenticated flag to true
-          localStorage.setItem('isAuthenticated', 'true');
-          this.$router.push('/messages');  // Redirect to Messages.vue
-        });
-  
-        this.client.initialize();
-      },
-    },
-  };
-  </script>
-  
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class LoginComponent extends Vue {
+  goToMessages() {
+    this.$router.push('/messages');
+  }
+}
+</script>

@@ -1,125 +1,99 @@
 <template>
-    <div class="message-container">
-        <h1 class="header">WhatsApp Messages</h1>
-        <div v-for="chat in chats" :key="chat.id" class="chat-container">
-            <h2 class="chat-name">{{ chat.name }}</h2>
-            <ul class="message-list">
-                <li v-for="message in chat.messages" :key="message.id" class="message">
-                    <span v-if="message.fromMe" class="message-sender me">Me: </span>
-                    <span v-else class="message-sender">{{ message.sender }}: </span>
-                    <span class="message-text">{{ message.text }}</span>
-                </li>
-            </ul>
+    <div class="message-component">
+      <div class="chat-header">
+        <h2>Chat with Ashan</h2>
+      </div>
+      <div class="chat-box">
+        <div class="message" v-for="message in messages" :key="message.id">
+          <div :class="message.sender === 'me' ? 'message-right' : 'message-left'">
+            {{ message.text }}
+          </div>
         </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Type a message" />
+        <button @click="sendMessage">Send</button>
+      </div>
     </div>
-</template>
+  </template>
   
-<script>
-
-const { Client } = require('whatsapp-web.js');
-const client = new Client();
-
-client.on('qr', (qr) => {
-    this.qrData = qr;
-});
-
-client.on('ready', () => {
-    console.log('Client is ready!');
-});
-
-client.initialize();
-
-// send a message
-const chat = await client.getChatById('1');
-chat.sendMessage('Hello');
-
-//receive messages
-client.on('message', (message) => {
-    console.log(`Received message from ${message.from}: ${message.body}`);
-});
-
-
-export default {
+  <script>
+  export default {
+    name: 'MessageComponent',
     data() {
-        return {
-            chats: [
-                {
-                    id: 1,
-                    name: 'Chat 1',
-                    messages: [
-                        { id: 1, text: 'Hello', fromMe: true },
-                        { id: 2, text: 'Hi', fromMe: false, sender: 'Friend' },
-                    ],
-                },
-                {
-                    id: 2,
-                    name: 'Chat 2',
-                    messages: [
-                        { id: 1, text: 'How are you?', fromMe: true },
-                        { id: 2, text: 'I am fine', fromMe: false, sender: 'Friend' },
-                    ],
-                },
-                // Add more chats here
-            ],
-        };
-    },
-    mounted() {
-        this.initWebSocket();
+      return {
+        newMessage: '',
+        messages: [
+          { id: 1, sender: 'me', text: 'Hello' },
+          { id: 2, sender: 'them', text: 'Hi Ashan!' },
+          { id: 3, sender: 'me', text: 'How are you?' },
+        ],
+      };
     },
     methods: {
-        initWebSocket() {
-            // Initialize WebSocket and listen for new messages    
-        },
+      sendMessage() {
+        if (this.newMessage.trim() === '') return;
+        this.messages.push({ id: Date.now(), sender: 'me', text: this.newMessage.trim() });
+        this.newMessage = '';
+      },
     },
-};
-</script>
+  };
+  </script>
   
-
-<style scoped>
-.message-container {
-    text-align: center;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-}
-
-.header {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.chat-container {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  <style scoped>
+  .message-component {
+    width: 400px;
+    margin: auto;
+  }
+  
+  .chat-header {
+    background-color: #f1f1f1;
     padding: 10px;
-    margin-bottom: 20px;
-}
-
-.chat-name {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.message-list {
-    list-style: none;
-    padding: 0;
-}
-
-.message {
-    margin: 5px 0;
-    padding: 5px;
+    text-align: center;
+  }
+  
+  .chat-box {
+    height: 300px;
+    overflow-y: auto;
     border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .message {
+    margin: 10px;
+  }
+  
+  .message-left {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  
+  .message-right {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    float: right;
+  }
+  
+  .chat-input {
+    margin-top: 10px;
+  }
+  
+  input[type="text"] {
+    width: 80%;
+    padding: 10px;
+  }
+  
+  button {
+    padding: 11px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
     border-radius: 5px;
-}
-
-.message-sender.me {
-    font-weight: bold;
-    color: #007bff;
-}
-
-.message-text {
-    margin-left: 5px;
-}
-</style>
+  }
+  </style>
+  
